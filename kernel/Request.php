@@ -8,7 +8,7 @@ class Request
 
     public function __construct()
     {
-        $this->uri = trim(urldecode($_SERVER['QUERY_STRING']), '/');
+        $this->uri = $_SERVER['REQUEST_URI'];
     }
 
     public function getMethod(): string
@@ -34,5 +34,19 @@ class Request
     public function post($name, $default = null): ?string
     {
         return $_POST[$name] ?? $default;
+    }
+
+    public function getPath(): string
+    {
+        return $this->removeQueryString();
+    }
+
+    protected function removeQueryString(): string
+    {
+        if($this->uri) {
+            $params = explode('?', $this->uri);
+            return trim($params[0], '/');
+        }
+        return "";
     }
 }
