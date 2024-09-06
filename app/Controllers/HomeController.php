@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use Core\View;
+
 class HomeController
 {
-    public function index(): string
+    public function index(): string|View
     {
-        return "hello world";
+        return view('index', ['name' => 'test']);
     }
 }

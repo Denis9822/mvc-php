@@ -38,7 +38,7 @@ class Router
 
         if ($route === false) {
             $this->response->setResponseCode(404);
-            echo "404 Not Found";
+            abort(404);
             die;
         }
 
